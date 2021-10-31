@@ -1,7 +1,7 @@
 #ifndef OOP_CARD_H
 #define OOP_CARD_H
 
-enum Suit
+enum class Suit
 {
     DIAMONDS,
     SPADES,
@@ -9,21 +9,21 @@ enum Suit
     CLUBS
 };
 
-enum CardValue
+enum class CardValue
 {
-    TWO,
-    THREE,
-    FOUR,
-    FIVE,
-    SIX,
-    SEVEN,
-    EIGHT,
-    NINE,
-    TEN,
-    JACK,
-    QUEEN,
-    KING,
-    ACE
+    TWO = 2,
+    THREE = 3,
+    FOUR = 4,
+    FIVE = 5,
+    SIX = 6,
+    SEVEN = 7,
+    EIGHT = 8,
+    NINE = 9,
+    TEN = 10,
+    JACK = 2,
+    QUEEN = 3,
+    KING = 4,
+    ACE = 11
 };
 
 class Card
@@ -34,7 +34,9 @@ class Card
         bool isVisible;
     public:
         Card(Suit suit, CardValue value, bool isVisible);
+
         void flip();
+
         int getValue();
 };
 
