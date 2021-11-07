@@ -1,72 +1,42 @@
 #include <iostream>
-#include <vector>
 
 #include "Homework2/Task1/Student.h"
 
-#include "Homework4/Task1/IntArray.h"
-#include "Homework4/Task2/UniqueNumbersCalculator.h"
-#include "BlackJack/Hand.h"
+#include "Homework5/Task1/Pair1.h"
+#include "Homework5/Task1/Pair1.cpp" // to avoid link errors
+#include "Homework5/Task2/Pair.h"
+#include "Homework5/Task2/Pair.cpp" // to avoid link errors
+#include "Homework5/Task3/StringValuePair.h"
 
 short Student::studentsCounter = 0;
 
 int main()
 {
     { // task 1
-        auto array = IntArray();
-        array.push(6);
-        array.push(4);
-        array.push(2);
-        array.push(3);
-        array.push(0);
-        array.push(1);
-        array.push(1);
-        array.push(13);
-        array.push(0);
-        array.push(21);
-        array.push(9);
-        array.print();
-        array.popBack();
-        array.print();
-        array.popFront();
-        array.print();
-        array.sort();
-        array.print();
+        Pair1<int> p1(6, 9);
+        std::cout << "Pair: " << p1.first() << ' ' << p1.second() << '\n';
+
+        const Pair1<double> p2(3.4, 7.8);
+        std::cout << "Pair: " << p2.first() << ' ' << p2.second() << '\n';
+
     }
 
     std::cout << std::endl << std::endl;
 
     { // task 2
-        auto vector = std::vector<int>();
-        vector.push_back(5);
-        vector.push_back(3);
-        vector.push_back(4);
-        vector.push_back(2);
-        vector.push_back(2);
-        vector.push_back(4);
-        vector.push_back(3);
-        vector.push_back(4);
-        vector.push_back(5);
-        vector.push_back(9);
+        Pair<int, double> p1(6, 7.8);
+        std::cout << "Pair: " << p1.first() << ' ' << p1.second() << '\n';
 
-        std::cout << "There are " << UniqueNumbersCalculator::calculate(vector) << " unique numbers in the vector." << std::endl;
+        const Pair<double, int> p2(3.4, 5);
+        std::cout << "Pair: " << p2.first() << ' ' << p2.second() << '\n';
+
     }
 
     std::cout << std::endl << std::endl;
 
     { // task 3
-        auto twoClubs = Card(Suit::CLUBS, CardValue::TWO, false);
-        auto threeSpades = Card(Suit::SPADES, CardValue::THREE, false);
-        auto aceDiamonds = Card(Suit::DIAMONDS, CardValue::ACE, false);
-        auto kingHearts = Card(Suit::HEARTS, CardValue::KING, false);
-
-        auto hand = Hand();
-        hand.add(&twoClubs);
-        hand.add(&threeSpades);
-        hand.add(&aceDiamonds);
-        hand.add(&kingHearts);
-
-        std::cout << "Hand value equals to " << hand.getValue() << std::endl;
-
+        StringValuePair<int> svp("Amazing", 7);
+        std::cout << "Pair: " << svp.first() << ' ' << svp.second() << '\n';
     }
 
     return 0;
