@@ -2,6 +2,7 @@
 #include <limits>
 
 #include "Homework2/Task1/Student.h"
+#include "BlackJack/Player.h"
 
 short Student::studentsCounter = 0;
 
@@ -44,6 +45,17 @@ int main()
     }
 
     std::cout << std::endl << std::endl;
+
+    { // task3
+        auto diamondsAce = Card(Suit::DIAMONDS, CardValue::ACE, true);
+        auto spadesKing = Card(Suit::SPADES, CardValue::KING, true);
+
+        auto player = Player("Alex");
+        player.add(&diamondsAce);
+        player.add(&spadesKing);
+
+        std::cout << player;
+    }
 
     return 0;
 }

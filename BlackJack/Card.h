@@ -1,6 +1,8 @@
 #ifndef OOP_CARD_H
 #define OOP_CARD_H
 
+#include <iostream>
+
 enum class Suit
 {
     DIAMONDS,
@@ -37,8 +39,11 @@ class Card
 
         void flip();
 
-        int getValue();
-};
+        int getValue() const;
 
+        std::string getSuit() const;
+
+        friend std::ostream &operator<<(std::ostream &os, const Card &card);
+};
 
 #endif //OOP_CARD_H
