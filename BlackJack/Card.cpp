@@ -1,7 +1,5 @@
 #include "Card.h"
 
-#include <exception>
-
 Card::Card(Suit suit, CardValue value, bool isVisible) : suit(suit), value(value), isVisible(isVisible)
 {}
 

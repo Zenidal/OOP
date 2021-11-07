@@ -20,9 +20,9 @@ enum class CardValue
     EIGHT = 8,
     NINE = 9,
     TEN = 10,
-    JACK = 2,
-    QUEEN = 3,
-    KING = 4,
+    JACK = 10,
+    QUEEN = 10,
+    KING = 10,
     ACE = 11
 };
 
