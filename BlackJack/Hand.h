@@ -9,15 +9,20 @@
 
 class Hand
 {
-    private:
+    protected:
         std::vector<Card *> cards;
 
     public:
+        Hand()
+        {}
+
+        ~Hand(){};
+
         void add(Card *card);
 
         void clear();
 
-        int getValue();
+        int getValue() const;
 };
 
 

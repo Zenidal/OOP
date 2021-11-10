@@ -11,7 +11,7 @@ void Hand::clear()
     cards.shrink_to_fit();
 }
 
-int Hand::getValue()
+int Hand::getValue() const
 {
     int sum = 0;
 

@@ -7,17 +7,21 @@
 
 class GenericPlayer : public Hand
 {
-    private:
+    protected:
         std::string name;
 
     public:
         GenericPlayer(std::string name);
 
-        virtual bool isHitting();
+        virtual ~GenericPlayer();
 
-        bool isBoosted();
+        virtual bool isHitting() const = 0;
 
-        void bust();
+        bool isBoosted() const;
+
+        void bust() const;
+
+        friend std::ostream &operator<<(std::ostream &os, const GenericPlayer &player);
 };
 
 
