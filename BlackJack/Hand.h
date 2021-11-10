@@ -5,6 +5,8 @@
 
 #include "Card.h"
 
+#define GAME_GOAL 21
+
 class Hand
 {
     private:
