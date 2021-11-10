@@ -1,60 +1,64 @@
 #include <iostream>
-#include <limits>
+#include <memory>
 
-#include "Homework2/Task1/Student.h"
 #include "BlackJack/Player.h"
 
-short Student::studentsCounter = 0;
+#include "Homework7/Task1/Date.h"
 
-std::ostream &endll(std::ostream &os)
+Date getLatestDate(const std::shared_ptr<Date> &date1, const std::shared_ptr<Date> &date2)
 {
-    os << "\n\n";
+    if (date1->getYear() != date2->getYear()) {
+        return date1->getYear() > date2->getYear() ? *date1 : *date2;
+    }
 
-    os.flush();
+    if (date1->getMonth() != date2->getMonth()) {
+        return date1->getMonth() > date2->getMonth() ? *date1 : *date2;
+    }
 
-    return os;
+    if (date1->getDay() != date2->getDay()) {
+        return date1->getDay() > date2->getDay() ? *date1 : *date2;
+    }
+
+    return *date1;
+}
+
+void exchangeDates(std::shared_ptr<Date> date1, std::shared_ptr<Date> date2)
+{
+    auto tempDate = *date1;
+    *date1 = *date2;
+    *date2 = tempDate;
 }
 
 int main()
 {
     { // task 1
-        int value;
-        bool isValidValue = false;
+        std::unique_ptr<Date> date;
+        std::unique_ptr<Date> today(new Date(2021, 11, 10));
 
-        do {
-            std::cout << "Please enter integer value: " << std::endl;
-            std::cin >> value;
+        std::cout << "Year: " << today->getYear() << ", month: " << today->getMonth() << ", day: " << today->getDay() << std::endl;
+        std::cout << "Date: " << *today << std::endl;
 
-            if (std::cin.good()) {
-                isValidValue = true;
-            } else {
-                std::cin.clear();
-                std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        date = std::move(today);
 
-                isValidValue = false;
-
-                std::cerr << value << " is not valid integer value." << std::endl;
-            }
-        } while (!isValidValue);
+        std::cout << "Is today nullable: " << std::boolalpha << (today == nullptr) << std::endl;
+        std::cout << "Is date nullable: " << std::boolalpha << (date == nullptr) << std::endl;
     }
 
-    std::cout << std::endl << std::endl;
+    std::cout << std::endl;
 
     { // task 2
-        std::cout << "Line 1" << endll << "Line 2" << std::endl;
-    }
+        std::shared_ptr<Date> date1(new Date(2021, 10, 10));
+        std::shared_ptr<Date> date2(new Date(2021, 11, 10));
 
-    std::cout << std::endl << std::endl;
+        std::cout << "Latest Date: " << getLatestDate(date1, date2) << std::endl;
+        std::cout << "Is first date nullable: " << std::boolalpha << (date1 == nullptr) << std::endl;
+        std::cout << "Is second date nullable: " << std::boolalpha << (date2 == nullptr) << std::endl;
 
-    { // task3
-        auto diamondsAce = Card(Suit::DIAMONDS, CardValue::ACE, true);
-        auto spadesKing = Card(Suit::SPADES, CardValue::KING, true);
-
-        auto player = Player("Alex");
-        player.add(&diamondsAce);
-        player.add(&spadesKing);
-
-        std::cout << player;
+        std::cout << "First date: " << *date1 << std::endl;
+        std::cout << "Second date: " << *date2 << std::endl;
+        exchangeDates(date1, date2);
+        std::cout << "First date: " << *date1 << std::endl;
+        std::cout << "Second date: " << *date2 << std::endl;
     }
 
     return 0;
