@@ -6,7 +6,7 @@
 class Player : public GenericPlayer
 {
     public:
-        Player(const std::string &name) : GenericPlayer(name)
+        explicit Player(const std::string &name) : GenericPlayer(name)
         {}
 
         bool isHitting() const override;

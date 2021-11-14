@@ -16,7 +16,12 @@ class Hand
         Hand()
         {}
 
-        ~Hand(){};
+        ~Hand()
+        {
+            for (auto card: cards) {
+                delete card;
+            }
+        };
 
         void add(Card *card);
 

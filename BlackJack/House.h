@@ -5,9 +5,12 @@
 
 #define HOUSE_GOAL 16
 
-class House : GenericPlayer
+class House : public GenericPlayer
 {
     public:
+        House() : GenericPlayer("House")
+        {};
+
         bool isHitting() const override;
 
         void flipFirstCard();
