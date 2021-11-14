@@ -1,60 +1,62 @@
 #include <iostream>
-#include <limits>
 
-#include "Homework2/Task1/Student.h"
-#include "BlackJack/Player.h"
+#include "Homework8/Task1/Task1.cpp"
+#include "Homework8/Task2/Bar.h"
+#include "Homework8/Task2/Ex.h"
+#include "Homework8/Task3/Robot.h"
+#include "Homework8/Task3/IllegalCommand.h"
 
-short Student::studentsCounter = 0;
-
-std::ostream &endll(std::ostream &os)
+void move(Robot &robot, int x, int y)
 {
-    os << "\n\n";
-
-    os.flush();
-
-    return os;
+    try {
+        robot.move(x, y);
+    } catch (IllegalCommand e) {
+        std::cerr << "Illegal command. New position (" << e.getNewX() << ", " << e.getNewY() << "). Original Position (" << e.getOriginalX() << ", " << e.getOriginalY() << ")" << std::endl;
+    } catch (OffTheField e) {
+        std::cerr << "Off the field. New position (" << e.getNewX() << ", " << e.getNewY() << "). Original Position (" << e.getOriginalX() << ", " << e.getOriginalY() << ")" << std::endl;
+    }
 }
 
 int main()
 {
     { // task 1
-        int value;
-        bool isValidValue = false;
+        try {
+            double value = 5.0;
+            double divider = 0;
 
-        do {
-            std::cout << "Please enter integer value: " << std::endl;
-            std::cin >> value;
-
-            if (std::cin.good()) {
-                isValidValue = true;
-            } else {
-                std::cin.clear();
-                std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-
-                isValidValue = false;
-
-                std::cerr << value << " is not valid integer value." << std::endl;
-            }
-        } while (!isValidValue);
+            std::cout << value << "/" << divider << " = ";
+            std::cout << divide(value, divider) << std::endl;
+        } catch (DivisionByZero &e) {
+            std::cerr << e.what() << std::endl;
+        }
     }
 
     std::cout << std::endl << std::endl;
 
     { // task 2
-        std::cout << "Line 1" << endll << "Line 2" << std::endl;
+        Bar bar;
+
+        try {
+            int n;
+
+            do {
+                std::cout << "Input n: " << std::endl;
+                std::cin >> n;
+                bar.setY(n);
+            } while (n != 0);
+        } catch (Ex e) {
+            std::cerr << e.getX() << std::endl;
+        }
     }
 
     std::cout << std::endl << std::endl;
 
     { // task3
-        auto diamondsAce = Card(Suit::DIAMONDS, CardValue::ACE, true);
-        auto spadesKing = Card(Suit::SPADES, CardValue::KING, true);
+        auto robot = Robot();
 
-        auto player = Player("Alex");
-        player.add(&diamondsAce);
-        player.add(&spadesKing);
-
-        std::cout << player;
+        move(robot, 32, 23);
+        move(robot, -1, 0);
+        move(robot, 1, 1);
     }
 
     return 0;

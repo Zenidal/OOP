@@ -22,5 +22,6 @@ class Student : public Person
         static short getStudentsCounter();
 };
 
+short Student::studentsCounter = 0;
 
 #endif //OOP_STUDENT_H
