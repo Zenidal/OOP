@@ -1,7 +1,7 @@
 #include <iostream>
 #include <memory>
 
-#include "BlackJack/Player.h"
+#include "BlackJack/Game.h"
 
 #include "Homework7/Task1/Date.h"
 
@@ -59,6 +59,40 @@ int main()
         exchangeDates(date1, date2);
         std::cout << "First date: " << *date1 << std::endl;
         std::cout << "Second date: " << *date2 << std::endl;
+    }
+
+    std::cout << std::endl;
+
+    { // black-jack
+        bool wantToPlay = true;
+
+        while (wantToPlay) {
+            std::cout << "Enter player names please (separated by spaces): " << std::endl;
+
+            std::string playerName;
+            std::vector<std::string> playerNames;
+            int playersNumber;
+
+            std::cout << "Please input players number: " << std::endl;
+            std::cin >> playersNumber;
+
+            for (int i = 0; i < playersNumber; i++) {
+                std::cout << "Input player name #" << (i + 1) << ":" << std::endl;
+                std::cin >> playerName;
+
+                playerNames.push_back(playerName);
+            }
+
+            auto game = Game(playerNames);
+            game.play();
+
+            std::cout << "Do you want to play once more? (Y/N)" << std::endl;
+
+            std::string decision;
+            std::cin >> decision;
+
+            wantToPlay = decision == "Y";
+        }
     }
 
     return 0;

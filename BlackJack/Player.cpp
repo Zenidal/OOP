@@ -23,7 +23,7 @@ bool Player::isHitting() const
     std::string isHitting;
 
     do {
-        std::cout << "Do you need one more card? (Y/N)" << std::endl;
+        std::cout << this->name << ": Do you need one more card? (Y/N)" << std::endl;
         std::cin >> isHitting;
 
         if (isHitting == "Y" || isHitting == "N") {
